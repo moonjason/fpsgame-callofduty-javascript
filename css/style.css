@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html { 
+    font-size: 62.5%; 
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+body {
+    width: 1000px;
+    height: 700px; 
+    margin-top: 40px;
+    /* margin-left: 220px; */
+}
+
+#screen {
+    width: 100%;
+    height: 85%;
+    border: .6rem solid black;
+    margin-top: 55px;
+    margin: 0 auto;
+    cursor: url("https://image.flaticon.com/icons/png/128/58/58873.png") 62 59, crosshair;
+    /* cursor: pointer; */
+    /* display: flex;  
+    justify-content: center; */
+}
