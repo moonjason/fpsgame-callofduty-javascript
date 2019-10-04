@@ -20,14 +20,58 @@ body {
     /* margin-left: 220px; */
 }
 
+.selectDisable {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.screen--start {
+    background-image: url('../images/level1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #screen {
     width: 100%;
     height: 85%;
     border: .6rem solid black;
     margin-top: 55px;
     margin: 0 auto;
-    cursor: url("https://image.flaticon.com/icons/png/128/58/58873.png") 62 59, crosshair;
-    /* cursor: pointer; */
-    /* display: flex;  
-    justify-content: center; */
+    cursor: url("../images/xhair.png") 62 59, crosshair;
+    text-align: center;
+    /* justify-content: center; */
+}
+
+#start-btn {
+    cursor: url("../images/xhair.png") 62 59, crosshair;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-top: 26%;
+    width: 12%;
+    height: 8%;
+    background-color: rgb(70, 70, 70);
+    border: .2rem solid rgb(70, 70, 70);
+    border-radius: 15px;
+    color: white;
+}
+
+#start-btn:hover {
+    background-color: white;
+    color:  rgb(92, 92, 92);
+}
+
+#gun {
+    width: 50%;
+    height: 50%;
+    margin-left: 50%;
+    margin-top: 30%; 
+}
+
+#ak {
+    width: 90%;
+    margin-top: 14.25%;
+    cursor: url("../images/xhair.png") 62 59, crosshair;
 }

@@ -7,7 +7,7 @@ Browser Game using JavaScript and jQuery
 - Game UI loads : Hearts or HP, score, ammo, Crosshair cursor
 - Level Begins and map loads
 - Random villains appear with occasional civilians 
-- Click on the villain score+ , click on civilians -- 
+- Click on the villain score++ , click on civilians score-- 
 - civilians disappear after 1 - 2 seconds
 - villians disappear if clicked, if not clicked on for 1.75 - 2.25 seconds, player hp--  and score--
 - when the villain is clicked faster, the more score you get 
