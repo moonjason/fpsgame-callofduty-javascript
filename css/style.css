@@ -17,6 +17,7 @@ body {
     width: 1000px;
     height: 700px; 
     margin-top: 40px;
+    background-color: #2C3539;
     /* margin-left: 220px; */
 }
 
@@ -34,6 +35,32 @@ body {
     background-size: cover;
 }
 
+
+.enemylvl1 {
+    width: 100%;
+    height: 100%;
+}
+
+.spawn {
+    display: inline-block;
+    width: 4.5%; /* 6.5%*/
+    height: 16%; /*19% */ 
+    border: .1rem solid black;
+    position: relative; 
+}
+
+.one {
+    position: absolute;
+    top: 44%;
+    left: 7%;
+}
+
+.two {
+    position: absolute; 
+    top: 40%;
+    left: 17.5%; 
+}
+
 #screen {
     width: 100%;
     height: 85%;
@@ -42,6 +69,8 @@ body {
     margin: 0 auto;
     cursor: url("../images/xhair.png") 62 59, crosshair;
     text-align: center;
+    position: relative;
+    background-color: #ffff;
     /* justify-content: center; */
 }
 
@@ -64,14 +93,17 @@ body {
 }
 
 #gun {
-    width: 50%;
-    height: 50%;
-    margin-left: 50%;
-    margin-top: 30%; 
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    /* margin-left: 40%; */
+    top: 60%;
+    left: 55%;
+    /* margin-top: 18.25%;  */
 }
 
 #ak {
-    width: 90%;
-    margin-top: 14.25%;
+    width: 110%;
+    height: 100%;
     cursor: url("../images/xhair.png") 62 59, crosshair;
 }
