@@ -18,55 +18,74 @@ const game = {
     level: 1, 
     hp: 5, 
     ammo: 8,
-    enemies: [], 
+    enemies: 0, 
     shooting() {
         $('#screen').on('click', function (){
             game.ammo--;
             if (game.ammo === 0) {
                 $('#screen').prepend('<div id="reload-text"/>');
                 $('#reload-text').text("Press 'R' to Reload");
+               
                 $('body').css('pointer-events', 'none');
+               
                 $('body').on('keypress', function(e) {
-                    console.log(e.which);
                     if (e.which == 114) {
                         event.preventDefault();
                         game.ammo = 8;
                         $('body').css('pointer-events', '');
                         $('#reload-text').remove();
                     }
-                })
-            }
+                });
+            };
         });
         $('.spawn').on('click', function(e) { //shooting
             if ($(e.target).is('img')) {
                 $(e.target).remove(); 
+                game.enemies--;
             }
         });
     },
     lvl1() {
         $('#screen').attr('class', 'screen--start');
         this.shooting();
-        this.spawnBaddies();
-     },
+        this.setTime();
+        while (game.timer > 0 ) {
+            this.spawnBaddies();
+        }
+    },
     setTime() {
         const timer = setInterval(function() {
             console.log(game.time);
             game.time--;
+            let rand = Math.floor(Math.random() * 2); //0 -1 
+
+            if (game.enemies < 2) { 
+                if ($('#spawn-' + rand).is(':empty')) {
+                    $('#spawn-' + rand).prepend('<img class="enemylvl1 selectDisable" src="images/enemylvl1.png">'); 
+                    game.enemies++; 
+                }
+            }
+
             if (game.time === 0) {
                 clearInterval(timer);
                 // call winLose();
             }
         }, 1000);
     },
-    spawnBaddies(){
-        const rand = Math.floor(Math.random() * 2); //0 -1 
-       
+    // spawnBaddies(){
+    //     let rand = Math.floor(Math.random() * 2); //0 -1 
         
-    },
+    //     if (game.enemies < 2) { 
+    //         if ($('#spawn-' + rand).is(':empty')) {
+    //             $('#spawn-' + rand).prepend('<img class="enemylvl1 selectDisable" src="images/enemylvl1.png">'); 
+    //             game.enemies++; 
+    //         }
+    //     }
+    // },
     winLose(){
 
     }
-};
+}
 
  
 buttonHandler();
