@@ -16,8 +16,9 @@ const init = function () { // Run game screen
 const game = { 
     time: 20,
     level: 1, 
-    hp: 5, 
+    hp: 5,
     ammo: 8,
+    score: 0,
     enemies: 0, 
     shooting() {
         $('#screen').on('click', function (){
@@ -49,16 +50,14 @@ const game = {
         $('#screen').attr('class', 'screen--start');
         this.shooting();
         this.setTime();
-        while (game.timer > 0 ) {
-            this.spawnBaddies();
-        }
+        // this.scoring();
     },
     setTime() {
         const timer = setInterval(function() {
             console.log(game.time);
             game.time--;
             
-            game.spawnBaddies();
+            game.spawnBaddies(); 
 
             if (game.time === 0) {
                 clearInterval(timer);
@@ -66,15 +65,29 @@ const game = {
             }
         }, 1000);
     },
-    spawnBaddies(){
+    spawnBaddies() {
         let rand = Math.floor(Math.random() * 5); //0 -1 
-        
+        let t = null; 
+
         if (game.enemies < 2) { 
             if ($('#spawn-' + rand).is(':empty')) {
                 $('#spawn-' + rand).prepend('<img class="enemylvl1 selectDisable" src="images/enemylvl1.png">'); 
                 game.enemies++; 
             }
         }
+        $('#spawn-' + rand).click(function() { 
+            game.score += 100; 
+            // dead body 
+            // 
+            if (t !== null) {clearTimeout(t);}
+
+            t = setTimeout(function() {
+                // villian shooting
+                game.hp--; 
+                game.score -= 50;
+
+            }, 1000);
+        })
     },
     winLose(){
 
