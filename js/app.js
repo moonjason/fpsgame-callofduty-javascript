@@ -57,7 +57,9 @@ const game = {
             console.log(game.time);
             game.time--;
             
-            game.spawnBaddies(); 
+            if (game.enemies < 2) { 
+                game.spawnBaddies(); 
+            }
 
             if (game.time === 0) {
                 clearInterval(timer);
@@ -69,25 +71,23 @@ const game = {
         let rand = Math.floor(Math.random() * 5); //0 -1 
         let t = null; 
 
-        if (game.enemies < 2) { 
-            if ($('#spawn-' + rand).is(':empty')) {
+        if ($('#spawn-' + rand).is(':empty')) {
                 $('#spawn-' + rand).prepend('<img class="enemylvl1 selectDisable" src="images/enemylvl1.png">'); 
                 game.enemies++; 
-            }
+                $('img').each(function(){
+                    $('img').on('click', function() {
+                        game.score += 100; 
+                    })
+
+                    if (t !== null) {clearTimeout(t)};
+                    t = setTimeout(function() {
+                        // villian shooting
+                        game.hp--; 
+                        game.score -= 50;
+                        console.log(game.hp + '<--- hp');
+                    }, 1450);
+                })
         }
-        $('#spawn-' + rand).click(function() { 
-            game.score += 100; 
-            // dead body 
-            // 
-            if (t !== null) {clearTimeout(t);}
-
-            t = setTimeout(function() {
-                // villian shooting
-                game.hp--; 
-                game.score -= 50;
-
-            }, 1000);
-        })
     },
     winLose(){
 
