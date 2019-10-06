@@ -16,7 +16,7 @@ const init = function () { // Run game screen
 const game = { 
     time: 20,
     level: 1, 
-    hp: 5, 
+    hp: 5,
     ammo: 8,
     score: 0,
     enemies: 0, 
