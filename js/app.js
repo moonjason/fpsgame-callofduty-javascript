@@ -49,9 +49,6 @@ const game = {
         $('#screen').attr('class', 'screen--start');
         this.shooting();
         this.setTime();
-        while (game.timer > 0 ) {
-            this.spawnBaddies();
-        }
     },
     setTime() {
         const timer = setInterval(function() {
