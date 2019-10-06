@@ -16,7 +16,7 @@ const init = function () { // Run game screen
 const game = { 
     time: 20,
     level: 1, 
-    hp: 5,
+    hp: 10,
     ammo: 8,
     score: 0,
     enemies: 0, 
@@ -57,7 +57,7 @@ const game = {
             console.log(game.time);
             game.time--;
             
-            if (game.enemies < 2) { 
+            if (game.enemies < 5) { 
                 game.spawnBaddies(); 
             }
 
@@ -77,15 +77,17 @@ const game = {
                 $('img').each(function(){
                     $('img').on('click', function() {
                         game.score += 100; 
+                        clearTimeout(t);
                     })
-
+                    
                     if (t !== null) {clearTimeout(t)};
+                        
                     t = setTimeout(function() {
-                        // villian shooting
-                        game.hp--; 
-                        game.score -= 50;
-                        console.log(game.hp + '<--- hp');
-                    }, 1450);
+                            // villian shooting
+                            game.hp--; 
+                            game.score -= 50;
+                            console.log(game.hp + '<--- hp');
+                    }, 3700);
                 })
         }
     },
