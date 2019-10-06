@@ -74,20 +74,10 @@ body {
     /* justify-content: center; */
 }
 
-#reload-text{
+#reload {
     font-size: 2.2rem;
-    position: relative;
-    top: 325px;
-    color: white;
-    animation: blinker 1s linear infinite;
-    opacity: 1;
-    /* margin: 0 auto; */
-}
-
-@keyframes blinker { 
-    50% {
-        opacity: 0;
-    }
+    width: 7%;
+    height: 3%;
 }
 
 #start-btn {

@@ -23,18 +23,7 @@ const game = {
         $('#screen').on('click', function (){
             game.ammo--;
             if (game.ammo === 0) {
-                $('#screen').prepend('<div id="reload-text"/>');
-                $('#reload-text').text("Press 'R' to Reload");
                 $('body').css('pointer-events', 'none');
-                $('body').on('keypress', function(e) {
-                    console.log(e.which);
-                    if (e.which == 114) {
-                        event.preventDefault();
-                        game.ammo = 8;
-                        $('body').css('pointer-events', '');
-                        $('#reload-text').remove();
-                    }
-                })
             }
         });
         $('.spawn').on('click', function(e) { //shooting
