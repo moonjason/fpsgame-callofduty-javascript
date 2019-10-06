@@ -57,14 +57,8 @@ const game = {
         const timer = setInterval(function() {
             console.log(game.time);
             game.time--;
-            let rand = Math.floor(Math.random() * 2); //0 -1 
-
-            if (game.enemies < 2) { 
-                if ($('#spawn-' + rand).is(':empty')) {
-                    $('#spawn-' + rand).prepend('<img class="enemylvl1 selectDisable" src="images/enemylvl1.png">'); 
-                    game.enemies++; 
-                }
-            }
+            
+            game.spawnBaddies(); 
 
             if (game.time === 0) {
                 clearInterval(timer);
@@ -72,16 +66,16 @@ const game = {
             }
         }, 1000);
     },
-    // spawnBaddies(){
-    //     let rand = Math.floor(Math.random() * 2); //0 -1 
+    spawnBaddies(){
+        let rand = Math.floor(Math.random() * 5); //0 -1 
         
-    //     if (game.enemies < 2) { 
-    //         if ($('#spawn-' + rand).is(':empty')) {
-    //             $('#spawn-' + rand).prepend('<img class="enemylvl1 selectDisable" src="images/enemylvl1.png">'); 
-    //             game.enemies++; 
-    //         }
-    //     }
-    // },
+        if (game.enemies < 2) { 
+            if ($('#spawn-' + rand).is(':empty')) {
+                $('#spawn-' + rand).prepend('<img class="enemylvl1 selectDisable" src="images/enemylvl1.png">'); 
+                game.enemies++; 
+            }
+        }
+    },
     winLose(){
 
     }
