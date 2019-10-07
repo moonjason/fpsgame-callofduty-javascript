@@ -20,9 +20,13 @@ const game = {
     ammo: 8,
     score: 0,
     enemies: 0, 
+    updateUI() {
+        $('.player-info').text(`Health: ${game.hp} Ammo: ${game.ammo}`);
+    },
     shooting() {
         $('#screen').on('click', function (){
             game.ammo--;
+            game.updateUI();
             if (game.ammo === 0) {
                 $('#screen').prepend('<div id="reload-text"/>');
                 $('#reload-text').text("Press 'R' to Reload");
@@ -33,6 +37,7 @@ const game = {
                     if (e.which == 114) {
                         event.preventDefault();
                         game.ammo = 8;
+                        game.updateUI();
                         $('body').css('pointer-events', '');
                         $('#reload-text').remove();
                     }
@@ -43,6 +48,8 @@ const game = {
             if ($(e.target).is('img')) {
                 $(e.target).remove(); 
                 game.enemies--;
+                game.score += 100; 
+                $('.score').text(`Score: ${game.score}`);
             }
         });
     },
@@ -76,7 +83,6 @@ const game = {
                 game.enemies++; 
                 $('img').each(function(){
                     $('img').on('click', function() {
-                        game.score += 100; 
                         clearTimeout(t);
                     })
                     
@@ -86,13 +92,15 @@ const game = {
                             // villian shooting
                             game.hp--; 
                             game.score -= 50;
+                            game.updateUI();
+                            $('.score').text(`Score: ${game.score}`);
                             console.log(game.hp + '<--- hp');
-                    }, 3700);
+                    }, 2900);
                 })
         }
     },
     winLose(){
-
+        //
     }
 }
 
