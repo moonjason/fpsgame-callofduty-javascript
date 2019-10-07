@@ -6,8 +6,6 @@ const buttonHandler = function () {
     });
 }
 
-// Function for shooting game logic 
-
 const init = function () { // Run game screen 
     game.lvl1(); 
 
@@ -79,7 +77,7 @@ const game = {
         let t = null; 
 
         if ($('#spawn-' + rand).is(':empty')) {
-                $('#spawn-' + rand).prepend('<img class="enemylvl1 selectDisable" src="images/enemylvl1.png">'); 
+                $('#spawn-' + rand).prepend('<img class="enemy" selectDisable" src="images/enemylvl1.png">'); 
                 game.enemies++; 
                 $('img').each(function(){
                     $('img').on('click', function() {
@@ -89,15 +87,22 @@ const game = {
                     if (t !== null) {clearTimeout(t)};
                         
                     t = setTimeout(function() {
-                            // villian shooting
+                            $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot.png');
+                            game.hit();
                             game.hp--; 
                             game.score -= 50;
                             game.updateUI();
                             $('.score').text(`Score: ${game.score}`);
                             console.log(game.hp + '<--- hp');
-                    }, 2900);
+                    }, 2800);
                 })
         }
+    },
+    hit(){
+        $('#overlay').css('display', 'block');
+        setTimeout(function() {
+            $('#overlay').fadeOut();
+            }, 150)
     },
     winLose(){
         //
