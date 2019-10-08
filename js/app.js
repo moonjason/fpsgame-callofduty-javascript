@@ -19,7 +19,8 @@ const game = {
     score: 0,
     enemies: 0, 
     updateUI() {
-        $('.player-info').text(`Health: ${game.hp} Ammo: ${game.ammo}`);
+        $('.player-info').html(`<div> Health: ${game.hp} <img class="ui" style ="width: 5%; height: 5%;" src="https://img.icons8.com/color/50/000000/heart-puzzle.png">
+        Ammo: ${game.ammo} <img class="ui" style="width: 5%; height: 5%;" src="https://img.icons8.com/color/48/000000/bullet.png"></div>`);
     },
     shooting() {
         $('#screen').on('click', function (){
