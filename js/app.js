@@ -84,11 +84,6 @@ const game = {
             };
             
             $('img').each(function(){
-
-                $('img').on('click', function() {
-                    clearTimeout(t);
-                })
-                
                 if (t !== null) {clearTimeout(t)};
                     
                 t = setTimeout(function() {
@@ -100,7 +95,11 @@ const game = {
                     game.hit();
                     $('.score').text(`Score: ${game.score}`);
                     console.log(game.hp + '<--- hp');
-                }, 2400);
+                }, 2500);
+
+                $('#img').on('click', function () {
+                    clearTimeout(t);
+                })
             });
         } else {
             return null;
