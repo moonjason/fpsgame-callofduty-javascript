@@ -41,6 +41,7 @@ body {
 }
 
 .ui {
+    display: none;
     text-shadow:
     -1px -1px 0 #fff,
     1px -1px 0 #fff,
@@ -83,6 +84,7 @@ body {
     width: 4.5%; /* 6.5%*/
     height: 16%; /*19% */ 
     position: relative; 
+    z-index: 2;
 }
 
 .one {
@@ -146,7 +148,19 @@ body {
     /* justify-content: center; */
 }
 
-#reload-text{
+#time {
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.2rem;
+    padding-top: 5px;
+    text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+#reload-text {
     font-family: 'Press Start 2P', cursive;
     font-size: 2.2rem;
     top: 50%;

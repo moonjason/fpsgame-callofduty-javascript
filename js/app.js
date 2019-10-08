@@ -12,15 +12,15 @@ const init = function () { // Run game screen
 }
 
 const game = { 
-    time: 20,
+    time: 30,
     level: 1, 
     hp: 10,
     ammo: 8,
     score: 0,
     enemies: 0, 
     updateUI() {
-        $('.player-info').html(`<div> Health: ${game.hp} <img class="ui" style ="width: 5%; height: 5%;" src="https://img.icons8.com/color/50/000000/heart-puzzle.png">
-        Ammo: ${game.ammo} <img class="ui" style="width: 5%; height: 5%;" src="https://img.icons8.com/color/48/000000/bullet.png"></div>`);
+        $('.player-info').html(`<div> Health: ${game.hp} <img style ="width: 5%; height: 5%;" src="https://img.icons8.com/color/50/000000/heart-puzzle.png">
+        Ammo: ${game.ammo} <img style="width: 5%; height: 5%;" src="https://img.icons8.com/color/48/000000/bullet.png"></div>`);
     },
     shooting() {
         $('#screen').on('click', function (){
@@ -54,6 +54,8 @@ const game = {
     },
     lvl1() {
         $('#screen').attr('class', 'screen--start');
+        $('#screen').prepend(`<div id="time">${game.time}</div>`);
+        $('.ui').css('display', 'block');
         this.shooting();
         this.setTime();
         // this.scoring();
@@ -62,6 +64,7 @@ const game = {
         const timer = setInterval(function() {
             console.log(game.time);
             game.time--;
+            $('#time').text(`${game.time}`);
             
             if (game.enemies < 5) { 
                 game.spawnBaddies(); 
@@ -74,7 +77,7 @@ const game = {
         }, 1000);
     },
     spawnBaddies() {
-        let rand = Math.floor(Math.random() * 5); //0 -1 
+        let rand = Math.floor(Math.random() * 5);
         let t = null; 
 
         if ($('#spawn-' + rand).children().length === 0) { 
@@ -87,6 +90,10 @@ const game = {
             $('img').each(function(){
                 if (t !== null) {clearTimeout(t)};
                     
+                $('img').on('click', function() {
+                    clearTimeout(t);
+                }); 
+                // t =
                 t = setTimeout(function() {
                     if (rand == 3 || rand == 4) {
                         $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot-w.png');
@@ -96,11 +103,8 @@ const game = {
                     game.hit();
                     $('.score').text(`Score: ${game.score}`);
                     console.log(game.hp + '<--- hp');
-                }, 2500);
+                }, 2800);
 
-                $('#img').on('click', function () {
-                    clearTimeout(t);
-                })
             });
         } else {
             return null;
@@ -113,10 +117,10 @@ const game = {
         game.updateUI();
         setTimeout(function() {
             $('#overlay').fadeOut();
-        }, 150)
+        }, 120)
     },
     winLose(){
-        //
+        //code 
     }
 }
 
