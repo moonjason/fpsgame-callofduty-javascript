@@ -76,33 +76,44 @@ const game = {
         let rand = Math.floor(Math.random() * 5); //0 -1 
         let t = null; 
 
-        if ($('#spawn-' + rand).is(':empty')) {
+        if ($('#spawn-' + rand).children().length === 0) { 
+            if (rand === 3 || rand === 4) {
+                $('#spawn-' + rand).prepend('<img class="enemy-w" selectDisable" src="images/enemylvl1-w.png">');
+            } else {
                 $('#spawn-' + rand).prepend('<img class="enemy" selectDisable" src="images/enemylvl1.png">'); 
-                game.enemies++; 
-                $('img').each(function(){
-                    $('img').on('click', function() {
-                        clearTimeout(t);
-                    })
-                    
-                    if (t !== null) {clearTimeout(t)};
-                        
-                    t = setTimeout(function() {
-                            $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot.png');
-                            game.hit();
-                            game.hp--; 
-                            game.score -= 50;
-                            game.updateUI();
-                            $('.score').text(`Score: ${game.score}`);
-                            console.log(game.hp + '<--- hp');
-                    }, 2800);
+            };
+            
+            $('img').each(function(){
+
+                $('img').on('click', function() {
+                    clearTimeout(t);
                 })
+                
+                if (t !== null) {clearTimeout(t)};
+                    
+                t = setTimeout(function() {
+                    if (rand == 3 || rand == 4) {
+                        $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot-w.png');
+                    } else {
+                        $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot.png');
+                    }
+                    game.hit();
+                    $('.score').text(`Score: ${game.score}`);
+                    console.log(game.hp + '<--- hp');
+                }, 2400);
+            });
+        } else {
+            return null;
         }
     },
     hit(){
         $('#overlay').css('display', 'block');
+        game.hp--; 
+        game.score -= 50;
+        game.updateUI();
         setTimeout(function() {
             $('#overlay').fadeOut();
-            }, 150)
+        }, 150)
     },
     winLose(){
         //
