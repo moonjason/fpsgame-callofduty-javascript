@@ -87,13 +87,13 @@ const game = {
                 $('#spawn-' + rand).prepend('<img class="enemy" selectDisable" src="images/enemylvl1.png">'); 
             };
             
-            $('img').each(function(){
+            $('#spawn-' + rand).each(function(){
                 if (t !== null) {clearTimeout(t)};
                     
-                $('img').on('click', function() {
+                $('#spawn-' + rand).on('click', function() {
                     clearTimeout(t);
                 }); 
-                // t =
+
                 t = setTimeout(function() {
                     if (rand == 3 || rand == 4) {
                         $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot-w.png');
@@ -120,7 +120,12 @@ const game = {
         }, 120)
     },
     winLose(){
-        //code 
+        if (game.score >= 1100 && game.hp > 0) {
+            // victory 
+        } else { 
+            // lose
+        }
+        // play again
     }
 }
 
