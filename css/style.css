@@ -50,7 +50,7 @@ body {
     padding-left: 8px;
     font-size: 2rem;
     font-family: 'Press Start 2P', cursive;
-    z-index: 4;
+    z-index: 2;
 }
 
 .player-info {
@@ -145,6 +145,7 @@ body {
     text-align: center;
     position: relative;
     background-color: #ffff;
+    z-index: 0;
     /* justify-content: center; */
 }
 
@@ -159,6 +160,40 @@ body {
     -1px 1px 0 #fff,
     1px 1px 0 #fff;
 }
+
+#death-text {
+    display: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.2rem;
+    top: 35%; /* 35% */
+    position: absolute;
+    left: 43%;
+    color: rgb(81, 255, 0);
+    opacity: 1;
+    z-index: 3;
+    /* animation: slidein1 1s linear 1; */
+}
+
+@keyframes slidein1 {
+    100% {
+        left: 43%;
+    }
+}
+
+
+#death-text2 {
+    display: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.2rem;
+    top: 50.5%;
+    position: absolute;
+    left: 24.5%;
+    color: rgb(81, 255, 0);
+    opacity: 1;
+    z-index: 3;
+    /* animation: slidein2 1s linear 1; */
+}
+
 
 #reload-text {
     font-family: 'Press Start 2P', cursive;
@@ -178,7 +213,7 @@ body {
     /* margin: 0 auto; */
 }
 
-@keyframes blinker { 
+@keyframes blinker {
     50% {
         opacity: 0;
     }

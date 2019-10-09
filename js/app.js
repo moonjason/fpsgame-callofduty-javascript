@@ -66,13 +66,22 @@ const game = {
             game.time--;
             $('#time').text(`${game.time}`);
             
+            if (game.hp === 0) {
+                clearInterval(timer);
+                game.lose();
+            }
+
             if (game.enemies < 5) { 
                 game.spawnBaddies(); 
             }
 
             if (game.time === 0) {
                 clearInterval(timer);
-                // call winLose();
+                if (game.score >= 1200 && game.hp > 0) {
+                    game.win();
+                } else { 
+                    game.lose();
+                }
             }
         }, 1000);
     },
@@ -82,17 +91,24 @@ const game = {
 
         if ($('#spawn-' + rand).children().length === 0) { 
             if (rand === 3 || rand === 4) {
-                $('#spawn-' + rand).prepend('<img class="enemy-w" selectDisable" src="images/enemylvl1-w.png">');
+                $('#spawn-' + rand).prepend('<img class="enemy-w selectDisable" src="images/enemylvl1-w.png">');
             } else {
-                $('#spawn-' + rand).prepend('<img class="enemy" selectDisable" src="images/enemylvl1.png">'); 
+                $('#spawn-' + rand).prepend('<img class="enemy selectDisable" src="images/enemylvl1.png">'); 
             };
-            
+            game.enemies++; 
+
             $('#spawn-' + rand).each(function(){
                 if (t !== null) {clearTimeout(t)};
-                    
+                
+                if (game.hp < 1 || game.time === 0) {
+                    clearTimeout(t);
+                    return;
+                }
+
                 $('#spawn-' + rand).on('click', function() {
                     clearTimeout(t);
                 }); 
+
 
                 t = setTimeout(function() {
                     if (rand == 3 || rand == 4) {
@@ -100,10 +116,11 @@ const game = {
                     } else {
                         $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot.png');
                     }
+
                     game.hit();
-                    $('.score').text(`Score: ${game.score}`);
+                    $('.score').text(`Score: ${game.score}`); 
                     console.log(game.hp + '<--- hp');
-                }, 2800);
+                }, 2400);
 
             });
         } else {
@@ -111,21 +128,51 @@ const game = {
         }
     },
     hit(){
-        $('#overlay').css('display', 'block');
-        game.hp--; 
-        game.score -= 50;
-        game.updateUI();
-        setTimeout(function() {
-            $('#overlay').fadeOut();
-        }, 120)
-    },
-    winLose(){
-        if (game.score >= 1100 && game.hp > 0) {
-            // victory 
-        } else { 
-            // lose
+        if (game.hp < 1) {
+            return false;
+        } else {
+            $('#overlay').css('display', 'block');
+            game.hp--; 
+            game.score -= 50;
+            game.updateUI();
+            setTimeout(function() {
+                $('#overlay').fadeOut();
+            }, 120)
         }
-        // play again
+    },
+    black() {
+        game.enemies = 0;
+        $('#screen').css('background-image', 'none');
+        $('#screen').css('background-color', 'black');
+    },
+    win() {
+        this.black();
+        this.updateUI();
+        $('body').css('pointer-events', 'none');
+        $('#death-text').css('display', 'block');
+        $('#death-text').text('You Win!');       
+        $('#death-text2').css('display', 'block');
+        $('.spawn').remove();
+        $('img').remove();
+        this.refresh();
+    },
+    lose() {
+        this.black();
+        this.updateUI();
+        $('body').css('pointer-events', 'none');
+        $('#death-text').css('display', 'block');
+        $('#death-text2').css('display', 'block');
+        $('.spawn').remove();
+        $('img').remove();
+        this.refresh();
+    },
+    refresh(){
+        $('#reload-text').css('display', 'none');
+        $('body').on('keypress', function(e) {
+            if (e.which === 32) {
+                location.reload();
+            }
+        });
     }
 }
 
