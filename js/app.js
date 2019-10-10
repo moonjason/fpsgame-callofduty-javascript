@@ -1,7 +1,13 @@
+const metalGear = new Audio ("audio/metalgear.mp3")
+const ak = new Audio ("audio/ak.wav")
+const reload = new Audio ("audio/reload.mp3")
+
 const buttonHandler = function () {
     $('#start-btn').on('click', () => {
         $('#start-btn').remove();
-        $('#gun').append('<img id="ak" class="selectDisable" src="images/ak.png"/>'); //show ak 
+        $('#gun').append('<img id="ak" class="selectDisable" src="images/ak.png"/>');
+        $('#rules').remove(); 
+        metalGear.play();
         init();
     });
 }
@@ -24,6 +30,7 @@ const game = {
     },
     shooting() {
         $('#screen').on('click', function (){
+            ak.play();
             game.ammo--;
             game.updateUI();
             if (game.ammo === 0) {
@@ -35,6 +42,7 @@ const game = {
                 $('body').on('keypress', function(e) {
                     if (e.which == 114) {
                         event.preventDefault();
+                        reload.play();
                         game.ammo = 8;
                         game.updateUI();
                         $('body').css('pointer-events', '');

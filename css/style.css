@@ -156,7 +156,8 @@ body {
     cursor: url("../images/xhair.png") 62 59, crosshair;
     text-align: center;
     position: relative;
-    background-color: #ffff;
+    background-color: #1c212b;
+    /* background-image: url("https://www.transparenttextures.com/patterns/cartographer.png"); */
     /* justify-content: center; */
 }
 
@@ -231,10 +232,12 @@ body {
 }
 
 #start-btn {
+    position: absolute;
     cursor: url("../images/xhair.png") 62 59, crosshair;
     font-weight: 700;
     font-size: 1.6rem;
-    margin-top: 26%;
+    left: 45%;
+    top: 66%;
     width: 12%;
     height: 8%;
     background-color: rgb(70, 70, 70);
@@ -256,6 +259,20 @@ body {
     top: 60%;
     left: 55%;
     /* margin-top: 18.25%;  */
+}
+
+#rules {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3.5rem;
+    top: 40%;
+    position: absolute;
+    left: 1.8%;
+    color: white;
+    text-shadow:
+    -1px -1px 0 #5e5e5e,
+    1px -1px 0 #5e5e5e,
+    -1px 1px 0 #5e5e5e,
+    1px 1px 0 #5e5e5e,;
 }
 
 #ak {
