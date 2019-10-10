@@ -1,5 +1,8 @@
 # proj1-fpsgame
-Browser Game using JavaScript and jQuery
+### Browser Game using JavaScript and jQuery
+
+![Screenshot](images/screenshot.png "Screenshot")
+
 
 ## User Story
 - Screen in the middle of the page
