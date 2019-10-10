@@ -2,6 +2,7 @@ const buttonHandler = function () {
     $('#start-btn').on('click', () => {
         $('#start-btn').remove();
         $('#gun').append('<img id="ak" class="selectDisable" src="images/ak.png"/>'); //show ak 
+        game.ammo = 8;
         init();
     });
 }
@@ -66,12 +67,14 @@ const game = {
             game.time--;
             $('#time').text(`${game.time}`);
             
-            if (game.enemies < 5) { 
+            if (game.enemies < 5 && game.hp >= 1) { 
                 game.spawnBaddies(); 
             }
 
-            if (game.time === 0) {
+            if (game.time === 0 || game.hp < 1) {
+                $('body').css('pointer-events', 'none');
                 clearInterval(timer);
+                game.winLose(); 
                 // call winLose();
             }
         }, 1000);
@@ -80,27 +83,30 @@ const game = {
         let rand = Math.floor(Math.random() * 5);
         let t = null; 
 
-        if ($('#spawn-' + rand).children().length === 0) { 
+        if ($('#spawn-' + rand).children().length === 0 && game.hp > 0) { 
             if (rand === 3 || rand === 4) {
                 $('#spawn-' + rand).prepend('<img class="enemy-w" selectDisable" src="images/enemylvl1-w.png">');
             } else {
                 $('#spawn-' + rand).prepend('<img class="enemy" selectDisable" src="images/enemylvl1.png">'); 
             };
             
-            $('#spawn-' + rand).each(function(){
-                if (t !== null) {clearTimeout(t)};
-                    
+            $('#spawn-' + rand).each(function(){                    
                 $('#spawn-' + rand).on('click', function() {
                     clearTimeout(t);
                 }); 
 
+                if (t !== null || game.hp < 1 || game.time < 1 ) {
+                    clearTimeout(t);
+                    return;
+                };
+
                 t = setTimeout(function() {
-                    if (rand == 3 || rand == 4) {
+                    if (rand === 3 || rand === 4) {
                         $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot-w.png');
                     } else {
                         $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot.png');
                     }
-                    game.hit();
+                    if (game.hp) {game.hit()};
                     $('.score').text(`Score: ${game.score}`);
                     console.log(game.hp + '<--- hp');
                 }, 2800);
@@ -111,16 +117,23 @@ const game = {
         }
     },
     hit(){
-        $('#overlay').css('display', 'block');
-        game.hp--; 
-        game.score -= 50;
-        game.updateUI();
-        setTimeout(function() {
-            $('#overlay').fadeOut();
-        }, 120)
+        if (game.hp < 1){
+            return;
+        } else {
+            $('#overlay').css('display', 'block');
+            game.hp--; 
+            game.score -= 50;
+            game.updateUI();
+            setTimeout(function() {
+                $('#overlay').fadeOut();
+            }, 120)
+        }
     },
     winLose(){
-        if (game.score >= 1100 && game.hp > 0) {
+        $('img').remove();
+        game.updateUI();
+        $('#overlay-2').css('display', 'block');
+        if (game.score >= 1200 && game.hp > 0) {
             // victory 
         } else { 
             // lose

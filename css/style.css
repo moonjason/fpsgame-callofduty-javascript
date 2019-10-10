@@ -121,7 +121,7 @@ body {
     display: none;
     position: absolute;
     width: 1012px;
-    height: 607px;
+    height: 606px;
     background-color: rgba(255, 0, 0, 0.6);
     cursor: url("../images/xhair.png") 62 59, crosshair;
     z-index: 1;
@@ -129,11 +129,23 @@ body {
     opacity: 1;
 }
 
-/* @keyframes shot {
-    50% {
-        background-color: rg; 
+#overlay-2 {
+    display: none;
+    position: absolute;
+    width: 1012px;
+    height: 606px;
+    background-color: rgb(94, 0, 0);
+    cursor: url("../images/xhair.png") 62 59, crosshair;
+    z-index: 1;
+    animation: ending .5s linear 1;
+    opacity: 1;
+}
+
+@keyframes ending {
+    0% {
+        opacity: 0; 
     }
-} */
+}
 
 #screen {
     width: 100%;
