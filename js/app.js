@@ -15,7 +15,7 @@ const game = {
     time: 30,
     level: 1, 
     hp: 10,
-    ammo: 8,
+    ammo: 9,
     score: 0,
     enemies: 0, 
     updateUI() {
@@ -66,22 +66,15 @@ const game = {
             game.time--;
             $('#time').text(`${game.time}`);
             
-            if (game.hp === 0) {
-                clearInterval(timer);
-                game.lose();
-            }
-
-            if (game.enemies < 5) { 
+            if (game.enemies < 5 && game.hp >= 1) { 
                 game.spawnBaddies(); 
             }
 
-            if (game.time === 0) {
+            if (game.time === 0 || game.hp < 1) {
+                $('body').css('pointer-events', 'none');
                 clearInterval(timer);
-                if (game.score >= 1200 && game.hp > 0) {
-                    game.win();
-                } else { 
-                    game.lose();
-                }
+                game.winLose(); 
+                // call winLose();
             }
         }, 1000);
     },
@@ -89,36 +82,31 @@ const game = {
         let rand = Math.floor(Math.random() * 5);
         let t = null; 
 
-        if ($('#spawn-' + rand).children().length === 0) { 
+        if ($('#spawn-' + rand).children().length === 0 && game.hp > 0) { 
             if (rand === 3 || rand === 4) {
                 $('#spawn-' + rand).prepend('<img class="enemy-w selectDisable" src="images/enemylvl1-w.png">');
             } else {
                 $('#spawn-' + rand).prepend('<img class="enemy selectDisable" src="images/enemylvl1.png">'); 
             };
-            game.enemies++; 
-
-            $('#spawn-' + rand).each(function(){
-                if (t !== null) {clearTimeout(t)};
-                
-                if (game.hp < 1 || game.time === 0) {
-                    clearTimeout(t);
-                    return;
-                }
-
+            
+            $('#spawn-' + rand).each(function(){                    
                 $('#spawn-' + rand).on('click', function() {
                     clearTimeout(t);
                 }); 
 
+                if (t !== null || game.hp < 1 || game.time < 1 ) {
+                    clearTimeout(t);
+                    return;
+                };
 
                 t = setTimeout(function() {
-                    if (rand == 3 || rand == 4) {
+                    if (rand === 3 || rand === 4) {
                         $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot-w.png');
                     } else {
                         $('#spawn-' + rand).children().attr('src', 'images/enemylvl1-shoot.png');
                     }
-
-                    game.hit();
-                    $('.score').text(`Score: ${game.score}`); 
+                    if (game.hp) {game.hit()};
+                    $('.score').text(`Score: ${game.score}`);
                     console.log(game.hp + '<--- hp');
                 }, 2400);
 
@@ -128,8 +116,8 @@ const game = {
         }
     },
     hit(){
-        if (game.hp < 1) {
-            return false;
+        if (game.hp < 1){
+            return;
         } else {
             $('#overlay').css('display', 'block');
             game.hp--; 
@@ -140,30 +128,21 @@ const game = {
             }, 120)
         }
     },
-    black() {
-        game.enemies = 0;
-        $('#screen').css('background-image', 'none');
-        $('#screen').css('background-color', 'black');
-    },
-    win() {
-        this.black();
-        this.updateUI();
-        $('body').css('pointer-events', 'none');
-        $('#death-text').css('display', 'block');
-        $('#death-text').text('You Win!');       
-        $('#death-text2').css('display', 'block');
-        $('.spawn').remove();
+    winLose(){
         $('img').remove();
-        this.refresh();
-    },
-    lose() {
-        this.black();
-        this.updateUI();
-        $('body').css('pointer-events', 'none');
-        $('#death-text').css('display', 'block');
-        $('#death-text2').css('display', 'block');
-        $('.spawn').remove();
-        $('img').remove();
+        $('#reload-text').remove();
+        $('.player-info').hide();
+        if (game.score >= 1200 && game.hp > 0) {
+            $('#overlay-2').css('background-color', 'rgb(33, 100, 223)');
+            $('#overlay-2').css('display', 'block');
+            $('#death-text').text('You Win!');       
+            $('#death-text').css('display', 'block');
+            $('#death-text2').css('display', 'block');    
+        } else { 
+            $('#overlay-2').css('display', 'block');
+            $('#death-text').css('display', 'block');
+            $('#death-text2').css('display', 'block')
+        }
         this.refresh();
     },
     refresh(){
