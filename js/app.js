@@ -116,7 +116,7 @@ const game = {
                     if (game.hp) {game.hit()};
                     $('.score').text(`Score: ${game.score}`);
                     console.log(game.hp + '<--- hp');
-                }, 2400);
+                }, 1400);
 
             });
         } else {
