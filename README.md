@@ -1,6 +1,8 @@
 # proj1-fpsgame
 ### Browser Game using JavaScript, CSS, and HTML 
 
+[Link to game](https://moonjason.github.io/fpsgame/)
+
 ![Screenshot](images/screenshot.png "Screenshot")
 
 
