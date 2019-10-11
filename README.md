@@ -12,5 +12,5 @@
 - Game UI loads : Hearts or HP, score, ammo, Crosshair cursor
 - Level Begins and map loads
 - Click on the villain score++ 
-- villians disappear if clicked, if not clicked on for 1.75 - 2.25 seconds, player hp--  and score--
-- To win the level, user must be alive during x amount of time and have x amount of score 
+- villians disappear if clicked, if not clicked on for x seconds, player hp--  and score--
+- To win the level, user must be alive during y amount of time and have z amount of score 
