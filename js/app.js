@@ -157,6 +157,7 @@ const game = {
         $('#reload-text').css('display', 'none');
         $('body').on('keypress', function(e) {
             if (e.which === 32) {
+                metalGear.pause();
                 location.reload();
             }
         });
