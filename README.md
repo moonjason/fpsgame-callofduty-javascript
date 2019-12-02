@@ -1,4 +1,4 @@
-# proj1-fpsgame
+# First-Person Shooting Game  // Call of Duty: JavaScript
 ### Browser Game using JavaScript, CSS, and HTML 
 
 [Link to game](https://moonjason.github.io/fpsgame/)
